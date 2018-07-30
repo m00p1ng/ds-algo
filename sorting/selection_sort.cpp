@@ -1,22 +1,9 @@
 #include <cstdio>
+#include "utils.cpp"
 #define MAX 1000000
 
 int n;
 int data[MAX];
-
-void swap(int* a, int* b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-void print_data() {
-    printf("   ");
-    for(int i = 0; i < n; i++) {
-        printf("%2d ", data[i]);
-    }
-    puts("");
-}
 
 void selection_sort() {
     for(int i = 0; i < n; i++) {
@@ -28,27 +15,17 @@ void selection_sort() {
         }
         if(min_idx != i) {
             swap(&data[min_idx], &data[i]);
-            print_data();
+            print_array(data, n);
         }
     }
 }
 
 int main() {
-    freopen("data/in", "r", stdin);
-
-    scanf("%d", &n);
-    for(int i = 0; i < n; i++) {
-        scanf("%d", &data[i]);
-    }
-
-    puts("Original:");
-    print_data();
-    puts("");
+    input_data(data, &n);
     
     puts("Selection sort:");
     selection_sort();
     puts("");
 
-    puts("Result:");
-    print_data();
+    print_result(data, n);
 }

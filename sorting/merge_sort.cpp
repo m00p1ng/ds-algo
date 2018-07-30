@@ -1,28 +1,16 @@
 #include <cstdio>
+#include "utils.cpp"
 #define MAX 1000000
 
 int n;
 int data[MAX];
 int temp[MAX];
 
-void swap(int* a, int* b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-void print_data() {
-    printf("   ");
-    for(int i = 0; i < n; i++) {
-        printf("%2d ", data[i]);
-    }
-    puts("");
-}
-
-void merge_proc(int left, int mid, int right) {
+void merge(int left, int mid, int right) {
     int l = left;
     int r = mid+1;
     int i = left;
+
     while(l <= mid && r <= right) {
         if(data[l] < data[r]) {
             temp[i] = data[l++];
@@ -54,25 +42,15 @@ void merge_sort(int left, int right) {
 
     merge_proc(left, mid, right);
     
-    print_data();
+    print_array(data, n);
 }
 
 int main() {
-    freopen("data/in", "r", stdin);
-
-    scanf("%d", &n);
-    for(int i = 0; i < n; i++) {
-        scanf("%d", &data[i]);
-    }
-
-    puts("Original:");
-    print_data();
-    puts("");
+    input_data(data, &n);
     
     puts("Merge sort:");
     merge_sort(0, n-1);
     puts("");
 
-    puts("Result:");
-    print_data();
+    print_result(data, n);
 }
